@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <title>Valentine Invitation 💖</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      background: linear-gradient(135deg, #ff758c, #ff7eb3);
+      color: white;
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      text-align: center;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.15);
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+      max-width: 350px;
+      width: 90%;
+    }
+
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    button {
+      background: #ff4d6d;
+      border: none;
+      color: white;
+      font-size: 1.2rem;
+      padding: 12px 25px;
+      margin: 10px;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: transform 0.2s, background 0.2s;
+    }
+
+    button:hover {
+      background: #ff2e55;
+      transform: scale(1.1);
+    }
+
+    img {
+      max-width: 100%;
+      border-radius: 15px;
+      margin-top: 15px;
+    }
+
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- PAGE 1 -->
+  <div class="container" id="page1">
+    <h1>💘 WILL YOU BE MY VALENTINE? 💘</h1>
+    <button onclick="goYes()">YES</button>
+    <button onclick="goYes()">YES</button>
+  </div>
+
+  <!-- PAGE 2 -->
+  <div class="container hidden" id="page2">
+    <h1>😭 THANK YOU 😭</h1>
+    <p>You just made me the happiest person alive 💖</p>
+
+    <!-- Meme image (you can change the link anytime) -->
+    <img src="https://i.imgur.com/8YkZK5R.png" alt="Emotional Meme">
+  </div>
+
+  <script>
+    function goYes() {
+      document.getElementById("page1").classList.add("hidden");
+      document.getElementById("page2").classList.remove("hidden");
+    }
+  </script>
+
+</body>
+</html>
