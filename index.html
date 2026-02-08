@@ -1,90 +1,157 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <title>Valentine Invitation 💖</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<meta charset="UTF-8">
+<title>Valentine 💖</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <style>
-    body {
-      margin: 0;
-      font-family: 'Comic Sans MS', cursive, sans-serif;
-      background: linear-gradient(135deg, #ff758c, #ff7eb3);
-      color: white;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      text-align: center;
-    }
+<style>
+  body {
+    margin: 0;
+    height: 100vh;
+    overflow: hidden;
+    font-family: 'Comic Sans MS', cursive, sans-serif;
+    background: linear-gradient(135deg, #ff758c, #ff7eb3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+  }
 
-    .container {
-      background: rgba(255, 255, 255, 0.15);
-      padding: 30px;
-      border-radius: 20px;
-      box-shadow: 0 10px 25px rgba(0,0,0,0.2);
-      max-width: 350px;
-      width: 90%;
-    }
+  .container {
+    background: rgba(255,255,255,0.15);
+    padding: 30px;
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+    width: 90%;
+    max-width: 360px;
+    z-index: 2;
+  }
 
-    h1 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
+  h1 {
+    font-size: 1.8rem;
+    margin-bottom: 20px;
+  }
 
-    button {
-      background: #ff4d6d;
-      border: none;
-      color: white;
-      font-size: 1.2rem;
-      padding: 12px 25px;
-      margin: 10px;
-      border-radius: 30px;
-      cursor: pointer;
-      transition: transform 0.2s, background 0.2s;
-    }
+  p {
+    font-size: 1.1rem;
+  }
 
-    button:hover {
-      background: #ff2e55;
-      transform: scale(1.1);
-    }
+  button {
+    background: #ff4d6d;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    padding: 12px 28px;
+    margin: 10px;
+    border-radius: 30px;
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+  }
 
-    img {
-      max-width: 100%;
-      border-radius: 15px;
-      margin-top: 15px;
-    }
+  button:hover {
+    background: #ff2e55;
+  }
 
-    .hidden {
-      display: none;
+  .tease:hover {
+    transform: translate(
+      calc((Math.random() - 0.5) * 120px),
+      calc((Math.random() - 0.5) * 120px)
+    );
+  }
+
+  .hidden {
+    display: none;
+  }
+
+  /* Falling hearts */
+  .heart {
+    position: absolute;
+    top: -20px;
+    color: rgba(255,255,255,0.85);
+    font-size: 20px;
+    animation: fall linear forwards;
+  }
+
+  @keyframes fall {
+    to {
+      transform: translateY(110vh);
+      opacity: 0;
     }
-  </style>
+  }
+
+  /* Explosion hearts */
+  .boom {
+    position: absolute;
+    pointer-events: none;
+    animation: explode 1s forwards;
+  }
+
+  @keyframes explode {
+    0% { transform: translate(0,0) scale(1); opacity: 1; }
+    100% { transform: translate(var(--x), var(--y)) scale(0); opacity: 0; }
+  }
+</style>
 </head>
 
 <body>
 
-  <!-- PAGE 1 -->
-  <div class="container" id="page1">
-    <h1>💘 WILL YOU BE MY VALENTINE? 💘</h1>
-    <button onclick="goYes()">YES</button>
-    <button onclick="goYes()">YES</button>
-  </div>
+<!-- PAGE 1 -->
+<div class="container" id="page1">
+  <h1>💘 FRENCESS JADE,<br>WILL YOU BE MY VALENTINE? 💘</h1>
+  <button class="tease" onclick="heartExplosion(event)">YES</button>
+  <button onclick="heartExplosion(event)">YES</button>
+</div>
 
-  <!-- PAGE 2 -->
-  <div class="container hidden" id="page2">
-    <h1>😭 THANK YOU 😭</h1>
-    <p>You just made me the happiest person alive 💖</p>
+<!-- PAGE 2 -->
+<div class="container hidden" id="page2">
+  <h1>💖 THANK YOU 💖</h1>
+  <p>You just made my heart the happiest 🥰</p>
+  <p><strong>I LOVE YOU SO MUCHIE! WAHAHAHA 💕</strong></p>
+</div>
 
-    <!-- Meme image (you can change the link anytime) -->
-    <img src="https://i.imgur.com/8YkZK5R.png" alt="Emotional Meme">
-  </div>
+<script>
+  function heartExplosion(e) {
+    const x = e.clientX;
+    const y = e.clientY;
 
-  <script>
-    function goYes() {
-      document.getElementById("page1").classList.add("hidden");
-      document.getElementById("page2").classList.remove("hidden");
+    for (let i = 0; i < 30; i++) {
+      const heart = document.createElement("div");
+      heart.className = "boom";
+      heart.innerHTML = "❤️";
+      heart.style.left = x + "px";
+      heart.style.top = y + "px";
+      heart.style.fontSize = Math.random() * 20 + 15 + "px";
+      heart.style.setProperty("--x", (Math.random() - 0.5) * 300 + "px");
+      heart.style.setProperty("--y", (Math.random() - 0.5) * 300 + "px");
+
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 1000);
     }
-  </script>
+
+    setTimeout(goYes, 800);
+  }
+
+  function goYes() {
+    document.getElementById("page1").classList.add("hidden");
+    document.getElementById("page2").classList.remove("hidden");
+  }
+
+  // Falling hearts
+  setInterval(() => {
+    const heart = document.createElement("div");
+    heart.className = "heart";
+    heart.innerHTML = "❤️";
+    heart.style.left = Math.random() * 100 + "vw";
+    heart.style.animationDuration = (Math.random() * 2 + 3) + "s";
+    heart.style.fontSize = (Math.random() * 15 + 15) + "px";
+    document.body.appendChild(heart);
+
+    setTimeout(() => heart.remove(), 5000);
+  }, 300);
+</script>
 
 </body>
 </html>
